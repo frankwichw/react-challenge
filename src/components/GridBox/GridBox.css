@@ -1,0 +1,11 @@
+.grid-box {
+    background-color: transparent;
+    background-size: cover;
+    width: 16.582%;
+    height: 200px;
+    box-sizing: border-box;
+    margin: 1px 1px 0px 0px;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+}

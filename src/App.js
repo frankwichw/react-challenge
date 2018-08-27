@@ -12,7 +12,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // ID of "largeDiv" which will be changed dependign on which image is large
       largeDivID: "imageTop1",
+      // Previous "largeDiv" so we know which image to make smaller
+      largeDivPrevious: "imageTop1",
       // To be filled once ajax call completes
       images: [],
     };
@@ -21,14 +24,19 @@ class App extends Component {
   // Invoked immediately after component is mounted
   componentDidMount() {
     // Call to Unsplash to get random image array for image sources
-    fetch(`https://api.unsplash.com/?client_id=${APIkey}`)
+    fetch(`https://api.unsplash.com/photos/curated?page=18/?client_id=${APIkey}`)
       .then(res => res.json())
       .then(
         (result) => {
           console.log(result);
-          this.setState({
-            images: result.items
-          });
+          // // Loop through results and get first 18 pictures
+          // for (var i = 0; i < 18; i++) {
+          //   // Set array to the images state
+          //   this.setState({
+          //     images: [...this.state.images, result.items[i].post_url]
+          //   });
+          // }
+
         },
         // Catch any errors
         (error) => {
@@ -38,80 +46,117 @@ class App extends Component {
         }
       )
     console.log(APIkey);
+    console.log(this.state.images);
   };
 
   // Function to handle when element is clicked on
   handleClick = (e) => {
     // Removes all characters except numbers from ids 
-    const columnNumber = e.target.id.replace(/\D/g,'');
+    let columnNumber = e.target.parentNode.id.replace(/\D/g,'');
+
     // If/else checks location of clicked div and (former) "largeDiv" to tell it where to place new "largeDiv"
     if (columnNumber < 6 && columnNumber > 1) {
-      // call function to handle 
+
+      // call function to handle these columns
       this.handleMidColumnClick(columnNumber, e);
+
     } else if (columnNumber == 1) {
-      console.log("column number is equal to 1");
 
-      // Shrink former "largeDiv"
-      document.getElementById(this.state.largeDivID).style.height = "200px";
-      document.getElementById(this.state.largeDivID).style.width = "100%";
+      // call function to handle this column
+      this.handleLeftColumnClick(e);
 
-      // Grow new "largeDiv"
-      document.getElementById(e.target.id).style.height = "400px";
-      document.getElementById(e.target.id).style.width = "200%";
-
-      // Set state to reflect new "largeDiv" (id will always be top)
-      // this.setState({largeDiv: {id: e.target.id}});
     } else if (columnNumber == 6) {
-      console.log("column number is equal to 6");
 
-      // Shrink former "largeDiv"
-      document.getElementById(this.state.largeDivID).style.height = "200px";
-      document.getElementById(this.state.largeDivID).style.width = "100%";
+      // call function to handle this column
+      this.handleRightColumnClick(e);
 
-      // Grow new "largeDiv"
-      document.getElementById(e.target.id).style.height = "400px";
-      document.getElementById(e.target.id).style.width = "200%";
-
-      // Set state to reflect new "largeDiv" (id will always be top - 1)
-      // this.setState({largeDiv: {id: e.target.id}});
     }
 
-    // Need to find algorithm to place new image in the top left most empty area so that it won't overflow downwards
-
-
-    // check id of largeDiv and compare it to the id of the clicked div
-    // if it's the same do nothing
-    // if it's different, compare to find out whether it is to the right or to the left
-    // if it is to the left, figure out whether clicked div is on bottom or top, and therefore which divs will be displaced
-    // make last largeDiv smaller, and new largeDiv bigger, updating state to reflect new largeDiv id, and the initial positions so we know how to displace next time
-    // append displaced divs
   };
 
   handleMidColumnClick = (column, buttonClickEvent) => {
-    console.log(column);
-    console.log("column is greater than 1 and less than 6");
 
     // Shrink former "largeDiv"
-    document.getElementById(this.state.largeDivID).style.height = "200px";
-    document.getElementById(this.state.largeDivID).style.width = "100%";
+    document.getElementById(this.state.largeDivPrevious).style.height = "200px";
+    document.getElementById(this.state.largeDivPrevious).style.width = "100%";
+
+    // Grow new "largeDiv"
+    document.getElementById(buttonClickEvent.target.id).style.height = "400px";
+    document.getElementById(buttonClickEvent.target.id).style.width = "200%";
+
+    // create new ID for image to reflect its new position
+    let columnNumber = column -1;
+    let newID = "imageTop" + columnNumber; 
+    let previousID = buttonClickEvent.target.id;
+
+    // Move "largeDiv" to top left location so that it does not overflow the bottom
+    // Get ids of divs in three positions that will be covered by "largeDiv"
+    let positionOne = "top" + column -1;
+    let positionTwo = "top" + column;
+    let positionThree = "bottom" + columnNumber;
+    let positionFour = "bottom" + column;
+    // Array of positions
+    let coveredPositions = [positionOne, positionTwo, positionThree, positionFour];
+
+
+
+    // change 
+
+
+    // Set state to reflect new "largeDiv" (id will always be top - 1)
+    this.setState({largeDivID: newID, largeDivPrevious: previousID});
+  };
+
+  handleLeftColumnClick = (buttonClickEvent) => {
+
+    // Shrink former "largeDiv"
+    document.getElementById(this.state.largeDivPrevious).style.height = "200px";
+    document.getElementById(this.state.largeDivPrevious).style.width = "100%";
 
     // Grow new "largeDiv"
     document.getElementById(buttonClickEvent.target.id).style.height = "400px";
     document.getElementById(buttonClickEvent.target.id).style.width = "200%";
 
     // Move "largeDiv" to top left location so that it does not overflow the bottom
+    // Get ids of divs in three positions that will be covered by "largeDiv"
+    let coveredPositions = ["top1", "top2", "bottom1", "bottom2"];
 
+    // Change position of div to top left
+
+    // 
 
     // create new ID for image to reflect its new position
-    const columnNumber = column -1;
-    const newID = "imageTop" + columnNumber; 
-    console.log(newID);
+    let newID = "imageTop1"; 
+    let previousID = buttonClickEvent.target.id;
+
+    // Set state to reflect new "largeDiv" (id will always be top - 1)
+    this.setState({largeDivID: newID, largeDivPrevious: previousID});
+
+  };
+
+  handleRightColumnClick = (buttonClickEvent) => {
+
+    // Shrink former "largeDiv"
+    document.getElementById(this.state.largeDivPrevious).style.height = "200px";
+    document.getElementById(this.state.largeDivPrevious).style.width = "100%";
+
+    // Grow new "largeDiv"
+    document.getElementById(buttonClickEvent.target.id).style.height = "400px";
+    document.getElementById(buttonClickEvent.target.id).style.width = "200%";
+
+    // Move "largeDiv" to top left location so that it does not overflow the bottom
+    // Get ids of divs in three positions that will be covered by "largeDiv"
+    let coveredPositions = ["top5", "top6", "bottom5", "bottom6"];
+
+    // create new ID for image to reflect its new position
+    let newID = "imageTop5"; 
+    let previousID = buttonClickEvent.target.id;
 
     // change 
 
+
     // Set state to reflect new "largeDiv" (id will always be top - 1)
-    this.setState({largeDivID: newID});
-    console.log("state: " + this.state.largeDivID);
+    this.setState({largeDivID: newID, largeDivPrevious: previousID});
   };
 
   render() {

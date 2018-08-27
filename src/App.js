@@ -12,9 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      largeDiv: {
-        id: "imageTop1"
-      },
+      largeDivID: "imageTop1",
       // To be filled once ajax call completes
       images: [],
     };
@@ -54,8 +52,8 @@ class App extends Component {
       console.log("column number is equal to 1");
 
       // Shrink former "largeDiv"
-      document.getElementById(this.state.largeDiv.id).style.height = "200px";
-      document.getElementById(this.state.largeDiv.id).style.width = "100%";
+      document.getElementById(this.state.largeDivID).style.height = "200px";
+      document.getElementById(this.state.largeDivID).style.width = "100%";
 
       // Grow new "largeDiv"
       document.getElementById(e.target.id).style.height = "400px";
@@ -67,8 +65,8 @@ class App extends Component {
       console.log("column number is equal to 6");
 
       // Shrink former "largeDiv"
-      document.getElementById(this.state.largeDiv.id).style.height = "200px";
-      document.getElementById(this.state.largeDiv.id).style.width = "100%";
+      document.getElementById(this.state.largeDivID).style.height = "200px";
+      document.getElementById(this.state.largeDivID).style.width = "100%";
 
       // Grow new "largeDiv"
       document.getElementById(e.target.id).style.height = "400px";
@@ -94,8 +92,8 @@ class App extends Component {
     console.log("column is greater than 1 and less than 6");
 
     // Shrink former "largeDiv"
-    document.getElementById(this.state.largeDiv.id).style.height = "200px";
-    document.getElementById(this.state.largeDiv.id).style.width = "100%";
+    document.getElementById(this.state.largeDivID).style.height = "200px";
+    document.getElementById(this.state.largeDivID).style.width = "100%";
 
     // Grow new "largeDiv"
     document.getElementById(buttonClickEvent.target.id).style.height = "400px";
@@ -112,8 +110,8 @@ class App extends Component {
     // change 
 
     // Set state to reflect new "largeDiv" (id will always be top - 1)
-    this.setState({largeDiv: {id: newID}});
-    console.log("state: " + this.state.largeDiv.id);
+    this.setState({largeDivID: newID});
+    console.log("state: " + this.state.largeDivID);
   };
 
   render() {

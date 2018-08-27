@@ -24,29 +24,28 @@ class App extends Component {
   // Invoked immediately after component is mounted
   componentDidMount() {
     // Call to Unsplash to get random image array for image sources
-    fetch(`https://api.unsplash.com/photos/curated?page=18/?client_id=${APIkey}`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          // // Loop through results and get first 18 pictures
-          // for (var i = 0; i < 18; i++) {
-          //   // Set array to the images state
-          //   this.setState({
-          //     images: [...this.state.images, result.items[i].post_url]
-          //   });
-          // }
+    fetch(`https://api.unsplash.com/photos/curated?per_page=18`, {
+      headers: { "Authorization": `Client-ID ${APIkey}`}
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log(result);
 
-        },
-        // Catch any errors
-        (error) => {
-          this.setState({
-            error
-          });
-        }
-      )
-    console.log(APIkey);
-    console.log(this.state.images);
+        // Set array to the images state
+        this.setState({
+          images: result
+        }, function () {
+          console.log("state upon callback: " + this.state.images[0].urls.small);
+        });
+      },
+      // Catch any errors
+      (error) => {
+        this.setState({
+          error
+        });
+      }
+    );
   };
 
   // Function to handle when element is clicked on
@@ -54,20 +53,20 @@ class App extends Component {
     // Removes all characters except numbers from ids 
     let columnNumber = e.target.parentNode.id.replace(/\D/g,'');
 
-    // If/else checks location of clicked div and (former) "largeDiv" to tell it where to place new "largeDiv"
+    // Checks location of clicked div "largeDiv" 
     if (columnNumber < 6 && columnNumber > 1) {
 
-      // call function to handle these columns
+      // Call function to handle these columns
       this.handleMidColumnClick(columnNumber, e);
 
     } else if (columnNumber == 1) {
 
-      // call function to handle this column
+      // Call function to handle this column
       this.handleLeftColumnClick(e);
 
     } else if (columnNumber == 6) {
 
-      // call function to handle this column
+      // Call function to handle this column
       this.handleRightColumnClick(e);
 
     }
@@ -84,7 +83,7 @@ class App extends Component {
     document.getElementById(buttonClickEvent.target.id).style.height = "400px";
     document.getElementById(buttonClickEvent.target.id).style.width = "200%";
 
-    // create new ID for image to reflect its new position
+    // Create new ID for image to reflect its new position
     let columnNumber = column -1;
     let newID = "imageTop" + columnNumber; 
     let previousID = buttonClickEvent.target.id;
@@ -100,7 +99,7 @@ class App extends Component {
 
 
 
-    // change 
+    // Change 
 
 
     // Set state to reflect new "largeDiv" (id will always be top - 1)
@@ -125,7 +124,7 @@ class App extends Component {
 
     // 
 
-    // create new ID for image to reflect its new position
+    // Create new ID for image to reflect its new position
     let newID = "imageTop1"; 
     let previousID = buttonClickEvent.target.id;
 
@@ -148,11 +147,14 @@ class App extends Component {
     // Get ids of divs in three positions that will be covered by "largeDiv"
     let coveredPositions = ["top5", "top6", "bottom5", "bottom6"];
 
-    // create new ID for image to reflect its new position
+    // Create new ID for image to reflect its new position
     let newID = "imageTop5"; 
     let previousID = buttonClickEvent.target.id;
 
-    // change 
+    // Append large div to top left div
+    // document.getElementById("top5").innerHTML += document.getElementById(buttonClickEvent.target.id);
+    let imgToBeMoved = document.getElementById(buttonClickEvent.target.id);
+    document.getElementById("top5").appendChild(imgToBeMoved);
 
 
     // Set state to reflect new "largeDiv" (id will always be top - 1)
@@ -168,7 +170,7 @@ class App extends Component {
             id="top1"
           >
             <Image 
-              url='http://www.pngall.com/wp-content/uploads/2016/05/Kitten-PNG-Picture.png'
+              url='http://pluspng.com/img-png/kitten-png-kitten-png-transparent-image-900.png'
               id="imageTop1"
               width="200%"
               height="400px"

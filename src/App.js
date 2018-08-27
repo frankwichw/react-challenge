@@ -12,62 +12,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      top1: {
-        id: "top1",
-      },
-      top2: {
-        id: "top2",
-      },
-      top3: {
-        id: "top3",
-      },
-      top4: {
-        id: "top4",
-      },
-      top5: {
-        id: "top5",
-      },
-      top6: {
-        id: "top6",
-      },
-      bottom1: {
-        id: "bottom1",
-      },
-      bottom2: {
-        id: "bottom2",
-      },
-      bottom3: {
-        id: "bottom3",
-      },
-      bottom4: {
-        id: "bottom4",
-      },
-      bottom5: {
-        id: "bottom5",
-      },
-      bottom6: {
-        id: "bottom6",
-      },
       largeDiv: {
         id: "imageTop1"
       },
       // To be filled once ajax call completes
       images: [],
-      // Image ids, don't belong in state because they are static
-      imageIds: {
-        id0: "imageTop1",
-        id1: "imageTop2",
-        id2: "imageTop3",
-        id3: "imageTop4",
-        id4: "imageTop5",
-        id5: "imageTop6",
-        id6: "imageBottom1",
-        id7: "imageBottom2",
-        id8: "imageBottom3",
-        id9: "imageBottom4",
-        id10: "imageBottom5",
-        id11: "imageBottom6"
-      }
     };
   };
 
@@ -173,100 +122,100 @@ class App extends Component {
         <div className="row">
           {/* First row */}
           <GridBox 
-            id={this.state.top1.id}
+            id="top1"
           >
             <Image 
               url='http://www.pngall.com/wp-content/uploads/2016/05/Kitten-PNG-Picture.png'
-              id={this.state.imageIds.id0}
+              id="imageTop1"
               width="200%"
               height="400px"
               imageOnClick={this.handleClick}
             />
           </GridBox>
           <GridBox 
-            id={this.state.top2.id}
+            id="top2"
           >
             {/* Starts empty */}
           </GridBox>
           <GridBox 
-            id={this.state.top3.id}
+            id="top3"
           >
             <Image 
               url='http://pluspng.com/img-png/kitten-png-kitten-png-transparent-image-900.png'
-              id={this.state.imageIds.id2}
+              id="imageTop3"
               imageOnClick={this.handleClick}
             />
           </GridBox>
           <GridBox 
-            id={this.state.top4.id}
+            id="top4"
           >
             <Image 
               url='http://newtownsquarevet.com/wp-content/uploads/2017/01/kitten-pounce.png'
-              id={this.state.imageIds.id3}
+              id="imageTop4"
               imageOnClick={this.handleClick}
             />
           </GridBox>
           <GridBox 
-            id={this.state.top5.id}
+            id="top5"
           >
             <Image 
               url='http://pluspng.com/img-png/kitten-png--243.png'
-              id={this.state.imageIds.id4}
+              id="imageTop5"
               imageOnClick={this.handleClick}
             />
           </GridBox>
           <GridBox 
-            id={this.state.top6.id}
+            id="top6"
           >
             <Image 
               url='https://banner2.kisspng.com/20180306/ikq/kisspng-abyssinian-kitten-whiskers-abyssinian-cat-5a9f06893fdf90.3366988615203713372616.jpg'
-              id={this.state.imageIds.id5}
+              id="imageTop6"
               imageOnClick={this.handleClick}
             />
           </GridBox>
           <GridBox 
-            id={this.state.bottom1.id}
+            id="bottom1"
           >
             {/* Starts empty */}
           </GridBox>
           <GridBox 
-            id={this.state.bottom2.id}
+            id="bottom2"
           >
             {/* Starts empty */}
           </GridBox>
           <GridBox 
-            id={this.state.bottom3.id}
+            id="bottom3"
           >
             <Image 
               url='https://pre00.deviantart.net/24c0/th/pre/i/2013/132/0/b/puppy_and_cats_free_png_stock_by_janeeden-d3aa07z.png'
-              id={this.state.imageIds.id8}
+              id="imageBottom3"
               imageOnClick={this.handleClick}
             />
           </GridBox>
           <GridBox 
-            id={this.state.bottom4.id}
+            id="bottom4"
           >
             <Image 
               url='https://img00.deviantart.net/1c51/i/2013/135/7/4/colourpoint_free_png_cat_stock_by_janeeden-d3azobp.png'
-              id={this.state.imageIds.id9}
+              id="imageBottom4"
               imageOnClick={this.handleClick}
             />
           </GridBox>
           <GridBox 
-            id={this.state.bottom5.id}
+            id="bottom5"
           >
             <Image 
               url='https://pre00.deviantart.net/261f/th/pre/i/2013/132/e/9/black_and_white_cat_free_png_stock_by_janeeden-d3azpnu.png'
-              id={this.state.imageIds.id10}
+              id="imageBottom5"
               imageOnClick={this.handleClick}
             />
           </GridBox>
           <GridBox 
-            id={this.state.bottom6.id}
+            id="bottom6"
           >
             <Image 
               url='https://clipart.info/images/ccovers/15228525606-cat-png-image-download-picture-kitten.png'
-              id={this.state.imageIds.id11}
+              id="imageBottom6"
               imageOnClick={this.handleClick}
             />
           </GridBox>

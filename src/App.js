@@ -170,9 +170,8 @@ class App extends Component {
         this.handleMovingImgs(currentItem.childNodes[0].id)
       }
       // Append large div to top left div
-      // To be uncommented when "handleMovingImgs" is functional
-      // let imgToBeMoved = document.getElementById(buttonClickEvent.target.id);
-      // document.getElementById("top5").appendChild(imgToBeMoved);
+      let imgToBeMoved = document.getElementById(buttonClickEvent.target.id);
+      document.getElementById("top5").appendChild(imgToBeMoved);
     }
 
     // Set state to reflect new "largeDiv" (id will always be top - 1)

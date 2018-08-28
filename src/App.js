@@ -88,7 +88,6 @@ class App extends Component {
 
   // Function to handle clicking on any column between 2 and 5
   handleMidColumnClick = (column, buttonClickEvent) => {
-
     // Shrink former "largeDiv"
     document.getElementById(this.state.largeDivPrevious).style.height = "200px";
     document.getElementById(this.state.largeDivPrevious).style.width = "100%";
@@ -111,18 +110,12 @@ class App extends Component {
     // Array of positions
     let coveredPositions = [positionOne, positionTwo, positionThree, positionFour];
 
-
-
-    // Change 
-
-
     // Set state to reflect new "largeDiv" (id will always be top - 1)
     this.setState({largeDivID: newID, largeDivPrevious: previousID});
   };
 
   // Function to handle clicking on the left-most column
   handleLeftColumnClick = (buttonClickEvent) => {
-
     // Shrink former "largeDiv"
     document.getElementById(this.state.largeDivPrevious).style.height = "200px";
     document.getElementById(this.state.largeDivPrevious).style.width = "100%";
@@ -148,7 +141,6 @@ class App extends Component {
 
   // Function to handle clicking on the right-most column
   handleRightColumnClick = (buttonClickEvent) => {
-
     // Shrink former "largeDiv"
     document.getElementById(this.state.largeDivPrevious).style.height = "200px";
     document.getElementById(this.state.largeDivPrevious).style.width = "100%";
@@ -178,11 +170,10 @@ class App extends Component {
         this.handleMovingImgs(currentItem.childNodes[0].id)
       }
       // Append large div to top left div
+      // To be uncommented when "handleMovingImgs" is functional
       // let imgToBeMoved = document.getElementById(buttonClickEvent.target.id);
       // document.getElementById("top5").appendChild(imgToBeMoved);
     }
-
-
 
     // Set state to reflect new "largeDiv" (id will always be top - 1)
     this.setState({largeDivID: newID, largeDivPrevious: previousID});
@@ -190,7 +181,6 @@ class App extends Component {
 
   // Function to handle moving images to empty divs
   handleMovingImgs = (divID) => {
-
     // Save div to variable
     let imgToMove = document.getElementById(divID);
     console.log(imgToMove);

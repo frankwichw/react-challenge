@@ -201,6 +201,7 @@ class App extends Component {
       // If currentDiv has no child elements, append the img to it
       if (document.getElementById(currentDiv).innerHTML.length < 1) {
         // Append img to current div
+        // Currently throwing an error
         // currentDiv.appendChild(imgToMove);
       }
     }

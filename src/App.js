@@ -7,6 +7,22 @@ import Image from './components/Image/Image.js';
 // API key
 const APIkey = `${process.env.REACT_APP_UNSPLASH_API_KEY}`;
 
+// Div ID array
+const divIDs = [
+  "top1",
+  "top2",
+  "top3",
+  "top4",
+  "top5",
+  "top6",
+  "bottom1",
+  "bottom2",
+  "bottom3",
+  "bottom4",
+  "bottom5",
+  "bottom6"
+];
+
 class App extends Component {
   
   constructor(props) {
@@ -70,6 +86,7 @@ class App extends Component {
 
   };
 
+  // Function to handle clicking on any column between 2 and 5
   handleMidColumnClick = (column, buttonClickEvent) => {
 
     // Shrink former "largeDiv"
@@ -103,6 +120,7 @@ class App extends Component {
     this.setState({largeDivID: newID, largeDivPrevious: previousID});
   };
 
+  // Function to handle clicking on the left-most column
   handleLeftColumnClick = (buttonClickEvent) => {
 
     // Shrink former "largeDiv"
@@ -114,12 +132,10 @@ class App extends Component {
     document.getElementById(buttonClickEvent.target.id).style.width = "200%";
 
     // Move "largeDiv" to top left location so that it does not overflow the bottom
-    // Get ids of divs in three positions that will be covered by "largeDiv"
+    // Get IDs of divs in three positions that will be covered by "largeDiv"
     let coveredPositions = ["top1", "top2", "bottom1", "bottom2"];
 
     // Change position of div to top left
-
-    // 
 
     // Create new ID for image to reflect its new position
     let newID = "imageTop1"; 
@@ -130,6 +146,7 @@ class App extends Component {
 
   };
 
+  // Function to handle clicking on the right-most column
   handleRightColumnClick = (buttonClickEvent) => {
 
     // Shrink former "largeDiv"
@@ -156,20 +173,37 @@ class App extends Component {
       let currentItem = document.getElementById(coveredPositions[i]);
       // If the currentItem has children
       // And the child is not the same as the one that was clicked on
-      if (currentItem.childNodes.length > 1 && currentItem.childNodes != buttonClickEvent.target) {
-        console.log(i + " " + currentItem.childNodes);
+      if (currentItem.childNodes.length >= 1 && currentItem != buttonClickEvent.parentNode) {
+        // Call function to loop through divs and find empty spot for it
+        this.handleMovingImgs(currentItem.childNodes[0].id)
       }
-      console.log(document.getElementById(coveredPositions[i].childNodes));
-      console.log(document.getElementById(coveredPositions[i]).innerHTML);
+      // Append large div to top left div
+      // let imgToBeMoved = document.getElementById(buttonClickEvent.target.id);
+      // document.getElementById("top5").appendChild(imgToBeMoved);
     }
 
-    // Append large div to top left div
-    // let imgToBeMoved = document.getElementById(buttonClickEvent.target.id);
-    // document.getElementById("top5").appendChild(imgToBeMoved);
 
 
     // Set state to reflect new "largeDiv" (id will always be top - 1)
     this.setState({largeDivID: newID, largeDivPrevious: previousID});
+  };
+
+  // Function to handle moving images to empty divs
+  handleMovingImgs = (divID) => {
+
+    // Save div to variable
+    let imgToMove = document.getElementById(divID);
+    console.log(imgToMove);
+    // Loop through available divs 
+    for (var i = 0; i < divIDs.length; i++) {
+      // Assign current div ID to a variable
+      let currentDiv = divIDs[i];
+      // If currentDiv has no child elements, append the img to it
+      if (document.getElementById(currentDiv).innerHTML.length < 1) {
+        // Append img to current div
+        // currentDiv.appendChild(imgToMove);
+      }
+    }
   };
 
   render() {

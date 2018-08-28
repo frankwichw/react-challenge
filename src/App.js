@@ -17,7 +17,7 @@ class App extends Component {
       // Previous "largeDiv" so we know which image to make smaller
       largeDivPrevious: "imageTop1",
       // To be filled once ajax call completes
-      images: [],
+      images: null,
     };
   };
 
@@ -30,13 +30,10 @@ class App extends Component {
     .then(res => res.json())
     .then(
       (result) => {
-        console.log(result);
 
         // Set array to the images state
         this.setState({
           images: result
-        }, function () {
-          console.log("state upon callback: " + this.state.images[0].urls.small);
         });
       },
       // Catch any errors
@@ -151,6 +148,15 @@ class App extends Component {
     let newID = "imageTop5"; 
     let previousID = buttonClickEvent.target.id;
 
+    // Before moving "largeDiv", check the positions it will take up, loop through them and find out if there is (a) anything in that div, and (b) find an empty spot for them
+    for (let i = 0; i < 4; i++) {
+      // if (document.getElementById(coveredPositions[i]).innerHTML.length > 1 && document.getElementById(coveredPositions[i]).childNodes != buttonClickEvent.target.id) {
+      //   console.log(i + " " + document.getElementById(coveredPositions[i].children));
+      // }
+      console.log(document.getElementById(coveredPositions[i].childNodes));
+      console.log(document.getElementById(coveredPositions[i]).innerHTML);
+    }
+
     // Append large div to top left div
     // document.getElementById("top5").innerHTML += document.getElementById(buttonClickEvent.target.id);
     let imgToBeMoved = document.getElementById(buttonClickEvent.target.id);
@@ -169,13 +175,15 @@ class App extends Component {
           <GridBox 
             id="top1"
           >
-            <Image 
-              url='http://pluspng.com/img-png/kitten-png-kitten-png-transparent-image-900.png'
-              id="imageTop1"
-              width="200%"
-              height="400px"
-              imageOnClick={this.handleClick}
-            />
+            { this.state && this.state.images &&
+              <Image 
+                url={this.state.images[0].urls.small}
+                id="imageTop1"
+                width="200%"
+                height="400px"
+                imageOnClick={this.handleClick}
+              />
+            }
           </GridBox>
           <GridBox 
             id="top2"
@@ -185,38 +193,46 @@ class App extends Component {
           <GridBox 
             id="top3"
           >
-            <Image 
-              url='http://pluspng.com/img-png/kitten-png-kitten-png-transparent-image-900.png'
-              id="imageTop3"
-              imageOnClick={this.handleClick}
-            />
+            { this.state && this.state.images &&
+              <Image 
+                url={this.state.images[1].urls.small}
+                id="imageTop3"
+                imageOnClick={this.handleClick}
+              />
+            }
           </GridBox>
           <GridBox 
             id="top4"
           >
-            <Image 
-              url='http://newtownsquarevet.com/wp-content/uploads/2017/01/kitten-pounce.png'
-              id="imageTop4"
-              imageOnClick={this.handleClick}
-            />
+            { this.state && this.state.images &&
+              <Image 
+                url={this.state.images[2].urls.small}
+                id="imageTop4"
+                imageOnClick={this.handleClick}
+              />
+            }
           </GridBox>
           <GridBox 
             id="top5"
           >
-            <Image 
-              url='http://pluspng.com/img-png/kitten-png--243.png'
-              id="imageTop5"
-              imageOnClick={this.handleClick}
-            />
+            { this.state && this.state.images &&
+              <Image 
+                url={this.state.images[3].urls.small}
+                id="imageTop5"
+                imageOnClick={this.handleClick}
+              />
+            }
           </GridBox>
           <GridBox 
             id="top6"
           >
-            <Image 
-              url='https://banner2.kisspng.com/20180306/ikq/kisspng-abyssinian-kitten-whiskers-abyssinian-cat-5a9f06893fdf90.3366988615203713372616.jpg'
-              id="imageTop6"
-              imageOnClick={this.handleClick}
-            />
+            { this.state && this.state.images &&
+              <Image 
+                url={this.state.images[4].urls.small}
+                id="imageTop6"
+                imageOnClick={this.handleClick}
+              />
+            }
           </GridBox>
           <GridBox 
             id="bottom1"
@@ -231,38 +247,46 @@ class App extends Component {
           <GridBox 
             id="bottom3"
           >
-            <Image 
-              url='https://pre00.deviantart.net/24c0/th/pre/i/2013/132/0/b/puppy_and_cats_free_png_stock_by_janeeden-d3aa07z.png'
-              id="imageBottom3"
-              imageOnClick={this.handleClick}
-            />
+            { this.state && this.state.images &&
+              <Image 
+                url={this.state.images[5].urls.small}
+                id="imageBottom3"
+                imageOnClick={this.handleClick}
+              />
+            }
           </GridBox>
           <GridBox 
             id="bottom4"
           >
-            <Image 
-              url='https://img00.deviantart.net/1c51/i/2013/135/7/4/colourpoint_free_png_cat_stock_by_janeeden-d3azobp.png'
-              id="imageBottom4"
-              imageOnClick={this.handleClick}
-            />
+            { this.state && this.state.images &&
+              <Image 
+                url={this.state.images[6].urls.small}
+                id="imageBottom4"
+                imageOnClick={this.handleClick}
+              />
+            }
           </GridBox>
           <GridBox 
             id="bottom5"
           >
-            <Image 
-              url='https://pre00.deviantart.net/261f/th/pre/i/2013/132/e/9/black_and_white_cat_free_png_stock_by_janeeden-d3azpnu.png'
-              id="imageBottom5"
-              imageOnClick={this.handleClick}
-            />
+            { this.state && this.state.images &&
+              <Image 
+                url={this.state.images[7].urls.small}
+                id="imageBottom5"
+                imageOnClick={this.handleClick}
+              />
+            }
           </GridBox>
           <GridBox 
             id="bottom6"
           >
-            <Image 
-              url='https://clipart.info/images/ccovers/15228525606-cat-png-image-download-picture-kitten.png'
-              id="imageBottom6"
-              imageOnClick={this.handleClick}
-            />
+            { this.state && this.state.images &&
+              <Image 
+                url={this.state.images[8].urls.small}
+                id="imageBottom6"
+                imageOnClick={this.handleClick}
+              />
+            }
           </GridBox>
         </div>
 

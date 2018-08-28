@@ -148,19 +148,24 @@ class App extends Component {
     let newID = "imageTop5"; 
     let previousID = buttonClickEvent.target.id;
 
-    // Before moving "largeDiv", check the positions it will take up, loop through them and find out if there is (a) anything in that div, and (b) find an empty spot for them
+    // Before moving "largeDiv", check the positions it will take up
+    // Loop through them and find out if there is 
+    // (a) anything in that div, and (b) find an empty spot for them
     for (let i = 0; i < 4; i++) {
-      // if (document.getElementById(coveredPositions[i]).innerHTML.length > 1 && document.getElementById(coveredPositions[i]).childNodes != buttonClickEvent.target.id) {
-      //   console.log(i + " " + document.getElementById(coveredPositions[i].children));
-      // }
+      // Get current div item by ID
+      let currentItem = document.getElementById(coveredPositions[i]);
+      // If the currentItem has children
+      // And the child is not the same as the one that was clicked on
+      if (currentItem.childNodes.length > 1 && currentItem.childNodes != buttonClickEvent.target) {
+        console.log(i + " " + currentItem.childNodes);
+      }
       console.log(document.getElementById(coveredPositions[i].childNodes));
       console.log(document.getElementById(coveredPositions[i]).innerHTML);
     }
 
     // Append large div to top left div
-    // document.getElementById("top5").innerHTML += document.getElementById(buttonClickEvent.target.id);
-    let imgToBeMoved = document.getElementById(buttonClickEvent.target.id);
-    document.getElementById("top5").appendChild(imgToBeMoved);
+    // let imgToBeMoved = document.getElementById(buttonClickEvent.target.id);
+    // document.getElementById("top5").appendChild(imgToBeMoved);
 
 
     // Set state to reflect new "largeDiv" (id will always be top - 1)
